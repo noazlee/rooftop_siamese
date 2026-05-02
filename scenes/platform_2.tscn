@@ -1,10 +1,10 @@
-[gd_scene format=3 uid="uid://dqxxo032rxkoy"]
+[gd_scene format=3 uid="uid://dhtpb6rjuhg4k"]
 
-[ext_resource type="Texture2D" uid="uid://cmxfh10d6d7xq" path="res://assets/sprites/BobsBuild/PNG/Ibeam.png" id="1_ba0x2"]
-[ext_resource type="Script" uid="uid://bi478b51waerk" path="res://scripts/platform.gd" id="1_nlgqw"]
+[ext_resource type="Script" uid="uid://bi478b51waerk" path="res://scripts/platform.gd" id="1_8vhdp"]
+[ext_resource type="Texture2D" uid="uid://cmxfh10d6d7xq" path="res://assets/sprites/BobsBuild/PNG/Ibeam.png" id="1_kx63a"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nlgqw"]
-texture = ExtResource("1_ba0x2")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8vhdp"]
+texture = ExtResource("1_kx63a")
 2:1/0 = 0
 6:1/0 = 0
 10:1/0 = 0
@@ -145,11 +145,11 @@ texture = ExtResource("1_ba0x2")
 5:14/0 = 0
 7:14/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_nlgqw"]
+[sub_resource type="TileSet" id="TileSet_vcjnh"]
 physics_layer_0/collision_layer = 1
-sources/0 = SubResource("TileSetAtlasSource_nlgqw")
+sources/0 = SubResource("TileSetAtlasSource_8vhdp")
 
-[sub_resource type="Animation" id="Animation_ba0x2"]
+[sub_resource type="Animation" id="Animation_8vhdp"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -161,12 +161,12 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(0, 30)]
+"values": [Vector2(0, 70)]
 }
 
-[sub_resource type="Animation" id="Animation_nlgqw"]
+[sub_resource type="Animation" id="Animation_kx63a"]
 resource_name = "move"
-length = 2.1
+length = 2.0
 loop_mode = 2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -175,28 +175,29 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 2.1),
+"times": PackedFloat32Array(0, 2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(0, 40)]
+"values": [Vector2(0, 0), Vector2(0, 90)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_507ja"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8vhdp"]
 _data = {
-&"RESET": SubResource("Animation_ba0x2"),
-&"move": SubResource("Animation_nlgqw")
+&"RESET": SubResource("Animation_8vhdp"),
+&"move": SubResource("Animation_kx63a")
 }
 
-[node name="Platform" type="AnimatableBody2D" unique_id=514712439]
-script = ExtResource("1_nlgqw")
+[node name="Platform2" type="AnimatableBody2D" unique_id=1549347392]
+script = ExtResource("1_8vhdp")
 
-[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=1715729502]
-position = Vector2(0, 30)
+[node name="AnimatableBody2D" type="AnimatableBody2D" parent="." unique_id=1574001618]
+position = Vector2(0, 70)
+rotation = 0.017453292
 
-[node name="TileMap" type="TileMap" parent="AnimatableBody2D" unique_id=1586982654]
-tile_set = SubResource("TileSet_nlgqw")
+[node name="TileMap" type="TileMap" parent="AnimatableBody2D" unique_id=821311710]
+tile_set = SubResource("TileSet_vcjnh")
 format = 2
 layer_0/tile_data = PackedInt32Array(-2, 327680, 13, -1, 393216, 13, -65536, 393216, 13, -65535, 393216, 13, -131074, 327680, 11, -65538, 327680, 12, -262146, 327680, 11, -196610, 327680, 12, -327682, 327680, 10, -327681, 393216, 10, -393216, 393216, 10, -65534, 458752, 13, -196606, 458752, 11, -131070, 458752, 12, -327678, 458752, 11, -262142, 458752, 12, -393214, 458752, 10, -393215, 393216, 10, -458752, 393216, 9, -524288, 393216, 8, -589824, 393216, 7, -655360, 393216, 7, -720896, 393216, 7, -786432, 393216, 7, -851968, 393216, 7, -917504, 393216, 7, -983040, 393216, 7, -1048576, 393216, 7, -1114112, 393216, 7, -1179648, 393216, 7, -1245184, 393216, 7, -1310720, 393216, 7, -1376256, 393216, 7, -1441792, 393216, 7, -1507328, 393216, 7, -1572864, 393216, 7, -1638400, 393216, 7, -1703936, 393216, 7, -1769472, 393216, 7, -1835008, 393216, 7, -1900544, 393216, 7, -1966080, 393216, 7)
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatableBody2D" unique_id=653489912]
-libraries/ = SubResource("AnimationLibrary_507ja")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AnimatableBody2D" unique_id=2114337236]
+libraries/ = SubResource("AnimationLibrary_8vhdp")

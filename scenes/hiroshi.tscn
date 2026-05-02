@@ -32,6 +32,26 @@ region = Rect2(160, 0, 32, 32)
 atlas = ExtResource("1_lhpsf")
 region = Rect2(192, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ip812"]
+atlas = ExtResource("3_p5yog")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ffucu"]
+atlas = ExtResource("3_p5yog")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enbin"]
+atlas = ExtResource("3_p5yog")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_amjxw"]
+atlas = ExtResource("3_p5yog")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_60ctu"]
+atlas = ExtResource("3_p5yog")
+region = Rect2(384, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvkia"]
 atlas = ExtResource("3_p5yog")
 region = Rect2(32, 0, 32, 32)
@@ -82,6 +102,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ip812")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ffucu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enbin")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_amjxw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_60ctu")
+}],
+"loop": true,
+"name": &"lick",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_kvkia")
 }, {
 "duration": 1.0,
@@ -110,7 +150,8 @@ script = ExtResource("1_36knq")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1257021791]
 position = Vector2(0, -15)
 sprite_frames = SubResource("SpriteFrames_kvkia")
-animation = &"idle"
+animation = &"lick"
+frame_progress = 0.5133652
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=831599399]
 position = Vector2(0, -8)
@@ -149,8 +190,12 @@ autostart = true
 [node name="SmallWallTimer" type="Timer" parent="Timers" unique_id=338071418]
 wait_time = 0.1
 
+[node name="LickTimer" type="Timer" parent="Timers" unique_id=1186598729]
+wait_time = 0.8
+
 [connection signal="timeout" from="Timers/Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="Timers/Timer2" to="." method="_on_timer_2_timeout"]
 [connection signal="timeout" from="Timers/Timer3" to="." method="_on_timer_3_timeout"]
 [connection signal="timeout" from="Timers/JumpTimer" to="." method="_on_jump_timer_timeout"]
 [connection signal="timeout" from="Timers/SmallWallTimer" to="." method="_on_small_wall_timer_timeout"]
+[connection signal="timeout" from="Timers/LickTimer" to="." method="_on_lick_timer_timeout"]

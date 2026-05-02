@@ -47,6 +47,7 @@ radius = 5.0
 radius = 5.0
 
 [node name="Rat" type="CharacterBody2D" unique_id=522629376]
+collision_layer = 5
 script = ExtResource("1_acf8p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=757483669]

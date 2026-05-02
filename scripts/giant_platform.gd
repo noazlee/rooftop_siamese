@@ -11,7 +11,3 @@ func _ready() -> void:
 	var wait_time = randf_range(0.5, 4)
 	wait(wait_time)
 	
-
-
-func _on_spawn_cat_boss_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.

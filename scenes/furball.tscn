@@ -2,8 +2,48 @@
 
 [ext_resource type="Script" uid="uid://c0s62omctidkt" path="res://scripts/furball.gd" id="1_xp8lq"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_535ma"]
+radius = 8.0
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p67h5"]
 load_path = "res://.godot/imported/furball-removebg-preview.png-6d2de50f87beb4fd3e6e33aab3ff32db.ctex"
+
+[sub_resource type="Animation" id="Animation_xp8lq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [6.2831855]
+}
+
+[sub_resource type="Animation" id="Animation_535ma"]
+resource_name = "roll"
+length = 1.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 12.566371]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xp8lq"]
+_data = {
+&"RESET": SubResource("Animation_xp8lq"),
+&"roll": SubResource("Animation_535ma")
+}
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_p67h5"]
 radius = 8.0
@@ -11,9 +51,31 @@ radius = 8.0
 [node name="Furball" type="CharacterBody2D" unique_id=1530612363]
 script = ExtResource("1_xp8lq")
 
+[node name="Area2D" type="Area2D" parent="." unique_id=361280716]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2011817598]
+shape = SubResource("CircleShape2D_535ma")
+
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1098062389]
+rotation = 6.2831855
 scale = Vector2(0.05, 0.05)
 texture = SubResource("CompressedTexture2D_p67h5")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=260073393]
+libraries/ = SubResource("AnimationLibrary_xp8lq")
+autoplay = &"roll"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1973252130]
 shape = SubResource("CircleShape2D_p67h5")
+
+[node name="Timer" type="Timer" parent="." unique_id=479711885]
+wait_time = 0.8
+
+[node name="TimerAway" type="Timer" parent="." unique_id=1368117366]
+wait_time = 0.2
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="TimerAway" to="." method="_on_timer_away_timeout"]
