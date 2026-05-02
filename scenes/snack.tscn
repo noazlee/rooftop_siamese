@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://jncalmarvm5a"]
+
+[ext_resource type="Texture2D" uid="uid://dajuefl87oa5r" path="res://assets/sprites/Free_pixel_food_16x16/Icons/cake_chocolate.png" id="1_aoxbv"]
+[ext_resource type="Script" uid="uid://tnl5jcp4s3hj" path="res://scripts/snack.gd" id="1_pc4uj"]
+
+[sub_resource type="Animation" id="Animation_pc4uj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.05235988]
+}
+
+[sub_resource type="Animation" id="Animation_himfn"]
+resource_name = "move"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.1, 1.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.08726646]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a0g01"]
+_data = {
+&"RESET": SubResource("Animation_pc4uj"),
+&"move": SubResource("Animation_himfn")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aoxbv"]
+radius = 6.0827627
+
+[node name="Snack" type="Area2D" unique_id=419707119]
+collision_mask = 2
+script = ExtResource("1_pc4uj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=863352393]
+rotation = 0.05235988
+texture = ExtResource("1_aoxbv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D" unique_id=2034361968]
+libraries/ = SubResource("AnimationLibrary_a0g01")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=325558174]
+shape = SubResource("CircleShape2D_aoxbv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://ctow5nvesbe5q"]
+
+[ext_resource type="Script" uid="uid://df8x6h5k555xi" path="res://scripts/hiroshi.gd" id="1_36knq"]
+[ext_resource type="Texture2D" uid="uid://0bjhnvfwgnqh" path="res://assets/sprites/AllCatsDemo/Siamese/IdleCattt.png" id="1_lhpsf"]
+[ext_resource type="Texture2D" uid="uid://p7ihvc4egwxf" path="res://assets/sprites/AllCatsDemo/Siamese/JumpCatttt.png" id="3_p5yog"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36knq"]
+atlas = ExtResource("1_lhpsf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p5yog"]
+atlas = ExtResource("1_lhpsf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_li8re"]
+atlas = ExtResource("1_lhpsf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ppp8i"]
+atlas = ExtResource("1_lhpsf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qf4ib"]
+atlas = ExtResource("1_lhpsf")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pvk1w"]
+atlas = ExtResource("1_lhpsf")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d17hq"]
+atlas = ExtResource("1_lhpsf")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvkia"]
+atlas = ExtResource("3_p5yog")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2u0q8"]
+atlas = ExtResource("3_p5yog")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7w22c"]
+atlas = ExtResource("3_p5yog")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q7ahk"]
+atlas = ExtResource("3_p5yog")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fe6b5"]
+atlas = ExtResource("3_p5yog")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_kvkia"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36knq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p5yog")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_li8re")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ppp8i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qf4ib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pvk1w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d17hq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvkia")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2u0q8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7w22c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q7ahk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fe6b5")
+}],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lhpsf"]
+radius = 8.0
+
+[node name="Hiroshi" type="CharacterBody2D" unique_id=983944126]
+script = ExtResource("1_36knq")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1257021791]
+position = Vector2(0, -15)
+sprite_frames = SubResource("SpriteFrames_kvkia")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=831599399]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_lhpsf")
+
+[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=43064048]
+position = Vector2(0, -8)
+target_position = Vector2(-12, -3)
+
+[node name="RayCastDownRight" type="RayCast2D" parent="." unique_id=546052146]
+position = Vector2(0, -8)
+target_position = Vector2(8, 12)
+
+[node name="RayCastDownLeft" type="RayCast2D" parent="." unique_id=1922991731]
+position = Vector2(0, -8)
+target_position = Vector2(-7, 12)
+
+[node name="RayCastRight" type="RayCast2D" parent="." unique_id=2057931083]
+position = Vector2(0, -8)
+target_position = Vector2(11, -3)
+
+[node name="Timers" type="Node" parent="." unique_id=453272885]
+
+[node name="Timer" type="Timer" parent="Timers" unique_id=2079461236]
+wait_time = 3.0
+
+[node name="Timer2" type="Timer" parent="Timers" unique_id=28096518]
+wait_time = 6.0
+
+[node name="Timer3" type="Timer" parent="Timers" unique_id=1942195117]
+wait_time = 8.0
+
+[node name="JumpTimer" type="Timer" parent="Timers" unique_id=16480442]
+autostart = true
+
+[node name="SmallWallTimer" type="Timer" parent="Timers" unique_id=338071418]
+wait_time = 0.1
+
+[connection signal="timeout" from="Timers/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timers/Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="Timers/Timer3" to="." method="_on_timer_3_timeout"]
+[connection signal="timeout" from="Timers/JumpTimer" to="." method="_on_jump_timer_timeout"]
+[connection signal="timeout" from="Timers/SmallWallTimer" to="." method="_on_small_wall_timer_timeout"]

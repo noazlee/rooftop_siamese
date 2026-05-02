@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://egndadgba3hd"]
+
+[ext_resource type="Script" uid="uid://c0s62omctidkt" path="res://scripts/furball.gd" id="1_xp8lq"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_p67h5"]
+load_path = "res://.godot/imported/furball-removebg-preview.png-6d2de50f87beb4fd3e6e33aab3ff32db.ctex"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p67h5"]
+radius = 8.0
+
+[node name="Furball" type="CharacterBody2D" unique_id=1530612363]
+script = ExtResource("1_xp8lq")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1098062389]
+scale = Vector2(0.05, 0.05)
+texture = SubResource("CompressedTexture2D_p67h5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1973252130]
+shape = SubResource("CircleShape2D_p67h5")

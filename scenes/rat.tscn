@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://deplmhbf5xnod"]
+
+[ext_resource type="Texture2D" uid="uid://cfhwmb2x2t8mu" path="res://assets/sprites/BobsBuild/PNG/Animated/Enemies/Rat/Rats.png" id="1_1l88y"]
+[ext_resource type="Script" uid="uid://kvgy5sl74rg0" path="res://scripts/rat.gd" id="1_acf8p"]
+[ext_resource type="PackedScene" uid="uid://cld6m54gps7de" path="res://scenes/killzone.tscn" id="2_77a1s"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_77a1s"]
+atlas = ExtResource("1_1l88y")
+region = Rect2(48, 16, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acf8p"]
+atlas = ExtResource("1_1l88y")
+region = Rect2(0, 16, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3csnj"]
+atlas = ExtResource("1_1l88y")
+region = Rect2(48, 0, 48, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6s34g"]
+atlas = ExtResource("1_1l88y")
+region = Rect2(0, 0, 48, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_368s2"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_77a1s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acf8p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3csnj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6s34g")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_acf8p"]
+radius = 5.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3csnj"]
+radius = 5.0
+
+[node name="Rat" type="CharacterBody2D" unique_id=522629376]
+script = ExtResource("1_acf8p")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=757483669]
+sprite_frames = SubResource("SpriteFrames_368s2")
+autoplay = "default"
+frame_progress = 0.14295106
+
+[node name="Killzone" parent="." unique_id=476747819 instance=ExtResource("2_77a1s")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=1131146242]
+position = Vector2(2, 3)
+shape = SubResource("CircleShape2D_acf8p")
+
+[node name="Timer" type="Timer" parent="." unique_id=1486973990]
+
+[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=755506045]
+scale = Vector2(1, 0.47)
+target_position = Vector2(-11, 0)
+
+[node name="RayCastDownLeft" type="RayCast2D" parent="." unique_id=1591125208]
+scale = Vector2(0.62, 0.91)
+target_position = Vector2(-9.677419, 12.087912)
+
+[node name="RayCastDownRight" type="RayCast2D" parent="." unique_id=1867404456]
+position = Vector2(4.0000005, 0)
+scale = Vector2(0.62, 0.91)
+target_position = Vector2(8.064515, 12.087912)
+
+[node name="RayCastRight" type="RayCast2D" parent="." unique_id=945571214]
+position = Vector2(4, 0)
+scale = Vector2(1, 0.47)
+target_position = Vector2(11, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1197610546]
+position = Vector2(2, 3)
+scale = Vector2(0.9, 0.9)
+shape = SubResource("CircleShape2D_3csnj")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
