@@ -72,9 +72,15 @@ func _ready() -> void:
 	Engine.time_scale = 1.0 
 	meow_sfx.play()
 	meow_timer.start()
-	timer.start()
-	timer_2.start()
-	timer_3.start()
+	
+	# Only slow start in Level 1
+	if get_tree().current_scene.scene_file_path == "res://scenes/game.tscn":
+		timer.start()
+		timer_2.start()
+		timer_3.start()
+	else:
+		move_limit = 1.0
+
 	pass
 	
 func _physics_process(delta: float) -> void:
