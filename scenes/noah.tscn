@@ -1,0 +1,68 @@
+[gd_scene format=3 uid="uid://dey5lallly8rw"]
+
+[ext_resource type="Texture2D" uid="uid://dq474kwo7wha5" path="res://assets/sprites/BobsBuild/PNG/Animated/Player/PlayerIdle.png" id="1_4nxrx"]
+[ext_resource type="Script" uid="uid://bat3xlvp0nnyn" path="res://scripts/noah.gd" id="1_jkd34"]
+[ext_resource type="AudioStream" uid="uid://gedoplpkhxhx" path="res://assets/sounds/power_up.wav" id="3_qe7wa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3hwga"]
+radius = 7.071068
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jkd34"]
+atlas = ExtResource("1_4nxrx")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qe7wa"]
+atlas = ExtResource("1_4nxrx")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75rpl"]
+atlas = ExtResource("1_4nxrx")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7t6q5"]
+atlas = ExtResource("1_4nxrx")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rg04"]
+atlas = ExtResource("1_4nxrx")
+region = Rect2(64, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pb6ft"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jkd34")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qe7wa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75rpl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7t6q5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3rg04")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Noah" type="Area2D" unique_id=573333750]
+collision_mask = 2
+script = ExtResource("1_jkd34")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=514612694]
+shape = SubResource("CircleShape2D_3hwga")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=25727733]
+sprite_frames = SubResource("SpriteFrames_pb6ft")
+frame_progress = 0.37831047
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="." unique_id=760788795]
+stream = ExtResource("3_qe7wa")
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

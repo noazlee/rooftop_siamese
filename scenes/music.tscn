@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://x2dwlaics3mp"]
+
+[ext_resource type="AudioStream" uid="uid://d1pele21aqcsp" path="res://assets/music/Stardew Valley OST - Mines (Cloth).mp3" id="1_05ggv"]
+[ext_resource type="Script" uid="uid://kulnynrc86tq" path="res://scenes/music.gd" id="2_ibx2e"]
+[ext_resource type="AudioStream" uid="uid://y6kcv7jb5ivv" path="res://assets/music/Stardew Valley OST - Mines (Magical Shoes).mp3" id="3_ejojg"]
+[ext_resource type="AudioStream" uid="uid://ob5np1r3rlxs" path="res://assets/music/Stardew Valley OST - Mines (The Lava Dwellers).mp3" id="4_wia2r"]
+
+[node name="Music" type="AudioStreamPlayer" unique_id=465076162]
+stream = ExtResource("1_05ggv")
+autoplay = true
+bus = &"Music"
+script = ExtResource("2_ibx2e")
+songs = Array[AudioStream]([ExtResource("1_05ggv"), ExtResource("3_ejojg"), ExtResource("4_wia2r")])

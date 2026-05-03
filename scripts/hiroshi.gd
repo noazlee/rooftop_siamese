@@ -12,8 +12,15 @@ extends CharacterBody2D
 @onready var ray_cast_down_left: RayCast2D = $RayCastDownLeft
 @onready var small_wall_timer: Timer = $Timers/SmallWallTimer
 @onready var furball_label: Label = $Camera2D/CanvasLayer/FurballLabel
+@onready var hp_label: Label = $Camera2D/CanvasLayer/HPLabel
+@onready var jump_sfx: AudioStreamPlayer2D = $JumpSFX
+@onready var meow_timer: Timer = $Timers/MeowTimer
+@onready var meow_sfx: AudioStreamPlayer2D = $MeowSFX
+@onready var furball_sfx: AudioStreamPlayer2D = $FurballSFX
+@onready var lick_sfx: AudioStreamPlayer2D = $LickSFX
+@onready var invincible_timer: Timer = $Timers/InvincibleTimer
 
-
+var is_invincible = false
 const FURBALL = preload("uid://egndadgba3hd")
 const MAX_FURBALLS = 3
 var cur_furballs = 3
@@ -31,15 +38,48 @@ var player_rotation = 0
 var on_left_wall = false
 var on_right_wall = false
 var direction_facing = 1
+var flash_tween: Tween
+
+const MAX_HEALTH = 3
+var health = MAX_HEALTH
+
+func take_damage(amount: int) -> void:
+	if is_invincible:
+		return
+	print("damage taken", health)
+	health -= amount
+	hp_label.text=":"+str(health)
+	velocity.y = -150
+	is_invincible = true
+	invincible_timer.start()
+	# start flashing
+	flash_tween = create_tween().set_loops()
+	flash_tween.tween_property(animated_sprite_2d, "modulate:a", 0.2, 0.1)
+	flash_tween.tween_property(animated_sprite_2d, "modulate:a", 1.0, 0.1)
+	if health <= 0:
+		die()
+
+func die() -> void:
+	print("dying")
+	Engine.time_scale = 0.5
+	get_node("CollisionShape2D").queue_free()
+	await get_tree().create_timer(1.5).timeout
+	Engine.time_scale = 1.0
+	get_tree().reload_current_scene()
 
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	meow_sfx.play()
+	meow_timer.start()
 	#timer.start()
 	#timer_2.start()
 	#timer_3.start()
 	pass
 	
 func _physics_process(delta: float) -> void:
+	
+	if position.y > 1000:
+		get_tree().reload_current_scene()
 	
 	# Add the gravity.
 	if not is_on_floor():
@@ -48,16 +88,19 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("lick"):
 		if not is_licking and is_on_floor() and cur_furballs < MAX_FURBALLS :
 			print("licking..")
+			lick_sfx.play(7.4)
 			is_licking = true
 			lick_timer.start()
 			velocity.x = 0
 			animated_sprite_2d.play("lick")
 			
 	if is_licking:
+		move_and_slide()
 		return
 		
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
+		jump_sfx.play()
 		velocity.y = JUMP_VELOCITY
 
 	# Get the input direction and handle the movement/deceleration.
@@ -69,8 +112,6 @@ func _physics_process(delta: float) -> void:
 		if cur_furballs > 0:
 			shoot(direction_facing)
 			
-	
-		
 	
 	# Check if colliding with wall in midair
 	if not on_left_wall and ray_cast_left.is_colliding() and not is_on_floor() and direction == -1:
@@ -156,6 +197,7 @@ func _on_jump_timer_timeout() -> void:
 	jump_timer.stop()
 	
 func shoot(direction):
+	furball_sfx.play()
 	var furball = FURBALL.instantiate()
 	cur_furballs -= 1
 	furball_label.text = ":"+str(cur_furballs) 
@@ -170,3 +212,16 @@ func _on_lick_timer_timeout() -> void:
 	cur_furballs += 1
 	furball_label.text = ":"+str(cur_furballs) 
 	lick_timer.stop()
+
+
+func _on_meow_timer_timeout() -> void:
+	meow_sfx.stop()
+	meow_timer.stop()
+
+
+func _on_invincible_timer_timeout() -> void:
+	is_invincible = false
+	invincible_timer.stop()
+	# stop flashing and restore full opacity
+	flash_tween.kill()
+	animated_sprite_2d.modulate.a = 1.0

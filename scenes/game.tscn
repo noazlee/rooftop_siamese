@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://b0b7re3hygd6l" path="res://assets/sprites/BobsBuild/PNG/Environment/GreyBrickWallSoftEdge.png" id="4_bhx41"]
 [ext_resource type="Texture2D" uid="uid://rtahx8af202g" path="res://assets/sprites/furball-removebg-preview.png" id="5_o8ni1"]
 [ext_resource type="Texture2D" uid="uid://d1xau0kay4rm1" path="res://assets/sprites/BobsBuild/PNG/Environment/IsSpikedAsphalt.png" id="5_qnb83"]
+[ext_resource type="Texture2D" uid="uid://m7tusk47ce8s" path="res://assets/sprites/benbushnell-pixel-heart-2779422.png" id="6_ms3bu"]
 [ext_resource type="Texture2D" uid="uid://b0hokcguwx2ta" path="res://assets/sprites/BobsBuild/PNG/Environment/IsSpikedBrickWall.png" id="6_sww3w"]
 [ext_resource type="Texture2D" uid="uid://druaxjq05ji4c" path="res://assets/sprites/BobsBuild/PNG/Environment/IsSpikedCementWall.png" id="7_suyxu"]
 [ext_resource type="Texture2D" uid="uid://bluyhdw7w6sq2" path="res://assets/sprites/BobsBuild/PNG/Environment/IsSpikedGreyBrickWall.png" id="8_sgl2t"]
@@ -4009,7 +4010,7 @@ script = ExtResource("1_i4re6")
 
 [node name="Hiroshi" parent="." unique_id=983944126 instance=ExtResource("1_uwrxv")]
 z_index = 5
-position = Vector2(1905, 57)
+position = Vector2(-264, 238)
 collision_layer = 2
 
 [node name="Camera2D" type="Camera2D" parent="Hiroshi" unique_id=513752290]
@@ -4052,6 +4053,23 @@ offset_left = 91.0
 offset_top = 81.0
 offset_right = 215.0
 offset_bottom = 113.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("50_rm0al")
+theme_override_font_sizes/font_size = 32
+text = ":3"
+
+[node name="Sprite2D3" type="Sprite2D" parent="Hiroshi/Camera2D/CanvasLayer" unique_id=160910537]
+position = Vector2(51, 158)
+scale = Vector2(0.025, 0.025)
+texture = ExtResource("6_ms3bu")
+
+[node name="HPLabel" type="Label" parent="Hiroshi/Camera2D/CanvasLayer" unique_id=1955704340]
+offset_left = 91.0
+offset_top = 145.0
+offset_right = 215.0
+offset_bottom = 177.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 2
@@ -4169,6 +4187,7 @@ position = Vector2(-116, 237)
 
 [node name="Killzone" parent="." unique_id=476747819 instance=ExtResource("48_fedci")]
 position = Vector2(657, 361)
+is_void = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=315033846]
 position = Vector2(-18, -13)

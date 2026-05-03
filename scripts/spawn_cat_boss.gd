@@ -15,4 +15,4 @@ func spawn_catboss():
 	var catboss = CAT_BOSS.instantiate()
 	catboss.position = Vector2(3456, 64)
 	catboss.direction = -1
-	get_tree().root.add_child(catboss)
+	get_tree().current_scene.add_child(catboss)

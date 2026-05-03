@@ -1,0 +1,186 @@
+[gd_scene format=3 uid="uid://tbcj82mrsrxn"]
+
+[ext_resource type="Script" uid="uid://cy7j1kv7o6nbd" path="res://scripts/cat_enemy_3.gd" id="1_r3nmw"]
+[ext_resource type="Texture2D" uid="uid://cmjmethfw0kt6" path="res://assets/sprites/AllCatsDemo/BlackCat/IdleCatb.png" id="2_d0oaf"]
+[ext_resource type="Texture2D" uid="uid://b3w1nxlovd5mm" path="res://assets/sprites/AllCatsDemo/BlackCat/JumpCabt.png" id="3_l3mxf"]
+[ext_resource type="PackedScene" uid="uid://cld6m54gps7de" path="res://scenes/killzone.tscn" id="4_l3mxf"]
+[ext_resource type="AudioStream" uid="uid://gedoplpkhxhx" path="res://assets/sounds/power_up.wav" id="5_8gjjq"]
+[ext_resource type="AudioStream" uid="uid://btn4cp8fterhv" path="res://assets/sounds/explosion.wav" id="6_2fp20"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8gjjq"]
+atlas = ExtResource("2_d0oaf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fp20"]
+atlas = ExtResource("2_d0oaf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v7byj"]
+atlas = ExtResource("2_d0oaf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_edp0a"]
+atlas = ExtResource("2_d0oaf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vupp2"]
+atlas = ExtResource("2_d0oaf")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgspy"]
+atlas = ExtResource("2_d0oaf")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8kjwa"]
+atlas = ExtResource("2_d0oaf")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nffq5"]
+atlas = ExtResource("3_l3mxf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kayts"]
+atlas = ExtResource("3_l3mxf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xafvo"]
+atlas = ExtResource("3_l3mxf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fq1n"]
+atlas = ExtResource("3_l3mxf")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fp51"]
+atlas = ExtResource("3_l3mxf")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_leavx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8gjjq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fp20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v7byj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_edp0a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vupp2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgspy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8kjwa")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nffq5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kayts")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xafvo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fq1n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fp51")
+}],
+"loop": true,
+"name": &"lick",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"run",
+"speed": 10.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q5rw7"]
+radius = 6.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q58j1"]
+radius = 5.0
+
+[node name="CatEnemy" type="CharacterBody2D" unique_id=29286364]
+collision_layer = 8
+script = ExtResource("1_r3nmw")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1756760517]
+sprite_frames = SubResource("SpriteFrames_leavx")
+animation = &"idle"
+autoplay = "idle"
+
+[node name="Killzone" parent="." unique_id=476747819 instance=ExtResource("4_l3mxf")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=1191564650]
+position = Vector2(0, 9)
+shape = SubResource("CircleShape2D_q5rw7")
+
+[node name="Timer" type="Timer" parent="." unique_id=1861972957]
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=208308548]
+wait_time = 2.0
+one_shot = true
+
+[node name="LickTimer" type="Timer" parent="." unique_id=301090102]
+wait_time = 7.0
+
+[node name="LickTimerTimer" type="Timer" parent="." unique_id=1527257531]
+
+[node name="NextLevelTimer" type="Timer" parent="." unique_id=631063507]
+
+[node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1557957612]
+position = Vector2(-3, 6.9999995)
+scale = Vector2(1, 2)
+target_position = Vector2(-118, 9.536743e-07)
+collision_mask = 2
+
+[node name="RayCastDownLeft" type="RayCast2D" parent="." unique_id=720681140]
+position = Vector2(-2.9999995, 7.999999)
+scale = Vector2(0.62, 0.91)
+target_position = Vector2(-9.677419, 12.087912)
+
+[node name="RayCastDownRight" type="RayCast2D" parent="." unique_id=1835057849]
+position = Vector2(4, 8.999998)
+scale = Vector2(0.62, 0.91)
+target_position = Vector2(8.064515, 12.087912)
+
+[node name="RayCastRight" type="RayCast2D" parent="." unique_id=2085470180]
+position = Vector2(4, 6.9999995)
+scale = Vector2(1, 2)
+target_position = Vector2(129, 9.536743e-07)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1819148601]
+position = Vector2(0, 9)
+scale = Vector2(0.9, 0.9)
+shape = SubResource("CircleShape2D_q58j1")
+
+[node name="DieSFX" type="AudioStreamPlayer2D" parent="." unique_id=853968036]
+stream = ExtResource("5_8gjjq")
+bus = &"SFX"
+
+[node name="ShootSFX" type="AudioStreamPlayer2D" parent="." unique_id=1294860115]
+stream = ExtResource("6_2fp20")
+max_distance = 180.0
+bus = &"SFX"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="LickTimer" to="." method="_on_lick_timer_timeout"]
+[connection signal="timeout" from="LickTimerTimer" to="." method="_on_lick_timer_timer_timeout"]
+[connection signal="timeout" from="NextLevelTimer" to="." method="_on_next_level_timer_timeout"]

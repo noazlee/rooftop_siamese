@@ -10,6 +10,13 @@ extends CharacterBody2D
 const SPEED = 50.0
 const JUMP_VELOCITY = -270.0
 var direction = 1
+var health = 1
+
+func take_damage(amount: int) -> void:
+	health -= amount
+	velocity.y = -50
+	if health <= 0:
+		queue_free()
 
 func _ready() -> void:
 	animated_sprite_2d.flip_h = true
@@ -39,5 +46,5 @@ func _physics_process(delta: float) -> void:
 
 func _on_timer_timeout() -> void:
 	timer.wait_time = randf_range(1.0, 5.0)
-	if is_on_floor():
+	if is_on_floor() and ray_cast_down_right.is_colliding() and  ray_cast_down_left.is_colliding() :
 		velocity.y = JUMP_VELOCITY

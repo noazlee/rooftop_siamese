@@ -4,6 +4,8 @@
 [ext_resource type="Script" uid="uid://binu7yyiol2vy" path="res://scripts/cat_boss.gd" id="1_leavx"]
 [ext_resource type="Texture2D" uid="uid://bpx8cnqohu65d" path="res://assets/sprites/AllCatsDemo/DemonicFree/JumpCatd.png" id="2_leavx"]
 [ext_resource type="PackedScene" uid="uid://cld6m54gps7de" path="res://scenes/killzone.tscn" id="2_w2xxv"]
+[ext_resource type="AudioStream" uid="uid://gedoplpkhxhx" path="res://assets/sounds/power_up.wav" id="5_q5rw7"]
+[ext_resource type="AudioStream" uid="uid://btn4cp8fterhv" path="res://assets/sounds/explosion.wav" id="6_q58j1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_w2xxv"]
 atlas = ExtResource("1_3ls6t")
@@ -184,6 +186,7 @@ radius = 6.0
 radius = 5.0
 
 [node name="CatBoss" type="CharacterBody2D" unique_id=29286364]
+collision_layer = 5
 script = ExtResource("1_leavx")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1756760517]
@@ -200,6 +203,17 @@ position = Vector2(0, 9)
 shape = SubResource("CircleShape2D_q5rw7")
 
 [node name="Timer" type="Timer" parent="." unique_id=1861972957]
+
+[node name="ShootTimer" type="Timer" parent="." unique_id=208308548]
+wait_time = 2.0
+one_shot = true
+
+[node name="LickTimer" type="Timer" parent="." unique_id=301090102]
+wait_time = 7.0
+
+[node name="LickTimerTimer" type="Timer" parent="." unique_id=1527257531]
+
+[node name="NextLevelTimer" type="Timer" parent="." unique_id=631063507]
 
 [node name="RayCastLeft" type="RayCast2D" parent="." unique_id=1557957612]
 position = Vector2(-3, 6.9999995)
@@ -228,4 +242,16 @@ position = Vector2(0, 9)
 scale = Vector2(0.9, 0.9)
 shape = SubResource("CircleShape2D_q58j1")
 
+[node name="DieSFX" type="AudioStreamPlayer2D" parent="." unique_id=853968036]
+stream = ExtResource("5_q5rw7")
+bus = &"SFX"
+
+[node name="ShootSFX" type="AudioStreamPlayer2D" parent="." unique_id=1294860115]
+stream = ExtResource("6_q58j1")
+bus = &"SFX"
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[connection signal="timeout" from="LickTimer" to="." method="_on_lick_timer_timeout"]
+[connection signal="timeout" from="LickTimerTimer" to="." method="_on_lick_timer_timer_timeout"]
+[connection signal="timeout" from="NextLevelTimer" to="." method="_on_next_level_timer_timeout"]

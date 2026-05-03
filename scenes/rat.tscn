@@ -44,10 +44,10 @@ animations = [{
 radius = 5.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3csnj"]
-radius = 5.0
+radius = 3.3333335
 
 [node name="Rat" type="CharacterBody2D" unique_id=522629376]
-collision_layer = 5
+collision_layer = 4
 script = ExtResource("1_acf8p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=757483669]
@@ -82,7 +82,7 @@ scale = Vector2(1, 0.47)
 target_position = Vector2(11, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1197610546]
-position = Vector2(2, 3)
+position = Vector2(2, 5)
 scale = Vector2(0.9, 0.9)
 shape = SubResource("CircleShape2D_3csnj")
 

@@ -24,8 +24,8 @@ func _on_timer_timeout() -> void:
 	queue_free()
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.get_node("CollisionShape2D") != null:
-		body.get_node("CollisionShape2D").queue_free()
+	if body.has_method("take_damage"):
+		body.take_damage(1)
 		queue_free()
 
 
