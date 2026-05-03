@@ -31,6 +31,8 @@ func take_damage(amount: int) -> void:
 		queue_free()
 
 func _ready() -> void:
+	ray_cast_left.collision_mask = 2
+	ray_cast_right.collision_mask = 2
 	animated_sprite_2d.flip_h = true
 	timer.wait_time = randf_range(2.0, 6.0)
 	shoot_timer.wait_time = randf_range(1.0, 4.0)
@@ -50,13 +52,14 @@ func _physics_process(delta: float) -> void:
 		
 	if is_on_floor():
 		
-		if ray_cast_left.is_colliding() or not ray_cast_down_right.is_colliding():
+		if ray_cast_left.is_colliding() or ray_cast_right.is_colliding():
 			will_shoot = true
+		
+		if ray_cast_left.is_colliding() or not ray_cast_down_right.is_colliding():
 			animated_sprite_2d.flip_h = true
 			direction = -1
 			
 		if ray_cast_right.is_colliding() or not ray_cast_down_left.is_colliding():
-			will_shoot = true
 			animated_sprite_2d.flip_h = false
 			direction = 1
 	
@@ -67,8 +70,8 @@ func _physics_process(delta: float) -> void:
 
 
 func _on_timer_timeout() -> void:
-	if alive and ray_cast_down_left.is_colliding() and ray_cast_down_right.is_colliding():
-		timer.wait_time = randf_range(3.0, 7.0)
+	if will_shoot and alive and ray_cast_down_left.is_colliding() and ray_cast_down_right.is_colliding():
+		timer.wait_time = randf_range(3.0, 8.0)
 		if is_on_floor():
 			velocity.y = JUMP_VELOCITY
 
@@ -81,10 +84,15 @@ func shoot():
 	if alive and will_shoot:
 		shoot_sfx.play()
 		var furball = FURBALL.instantiate()
-		add_collision_exception_with(furball)
+		get_tree().root.add_child(furball)  # add to scene FIRST
+		
+		add_collision_exception_with(furball)  # enemy ignores furball
+		# Ignore ALL cat enemies
+		for enemy in get_tree().get_nodes_in_group("cat_enemy"):
+			furball.add_collision_exception_with(enemy)
+		
 		furball.position = Vector2(position.x, position.y - 10)
 		furball.direction = direction
-		get_tree().root.add_child(furball)
 
 
 func _on_lick_timer_timeout() -> void:

@@ -4333,7 +4333,7 @@ script = ExtResource("53_detb5")
 
 [node name="Hiroshi" parent="." unique_id=983944126 instance=ExtResource("54_0rx2t")]
 z_index = 5
-position = Vector2(-270, 210)
+position = Vector2(-262, 209)
 collision_layer = 2
 
 [node name="Camera2D" type="Camera2D" parent="Hiroshi" unique_id=1776943466]
