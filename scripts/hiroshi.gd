@@ -32,8 +32,8 @@ const SPEED = 150.0
 const JUMP_VELOCITY = -380.0
 const MAX_JUMP_TIME = 0.5
 var hold_time = 0.0
-#var move_limit = 0.3
-var move_limit=1.0
+var move_limit = 0.3
+#var move_limit=1.0
 var player_rotation = 0
 var on_left_wall = false
 var on_right_wall = false
@@ -69,11 +69,12 @@ func die() -> void:
 
 ## Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Engine.time_scale = 1.0 
 	meow_sfx.play()
 	meow_timer.start()
-	#timer.start()
-	#timer_2.start()
-	#timer_3.start()
+	timer.start()
+	timer_2.start()
+	timer_3.start()
 	pass
 	
 func _physics_process(delta: float) -> void:

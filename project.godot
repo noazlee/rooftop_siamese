@@ -26,6 +26,7 @@ Music="*uid://x2dwlaics3mp"
 [display]
 
 window/size/resizable=false
+window/stretch/mode="canvas_items"
 
 [input]
 
